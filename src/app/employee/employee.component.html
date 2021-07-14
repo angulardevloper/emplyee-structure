@@ -1,0 +1,70 @@
+<div class="emp-container">
+ <div >
+     <div class="row ">
+         <div class="col-sm-6 col-lg-4">
+            <input class="form-control h-39" type="text" (input)="search(input.value)" placeholder="Search" #input>
+         </div>
+         <div class="col-sm-4 col-lg-2">
+            <select class="form-control"  (change)="filterExperience($event)">  
+                <option disabled>Experience</option>  
+                <option value="0">All Experience</option>  
+                <option value="1">More than 1</option>  
+                <option value="2">More than 2</option>  
+                <option value="3">More than 3</option>  
+                <option value="4">More than 4</option>  
+                <option value="5">More than 5</option>  
+                <option value="6">More than 6</option>  
+            </select>  
+        </div>
+        <div class="col-sm-4 col-lg-2">
+            <select class="form-control"  (change)="removeDepartment($event)">  
+                <option disabled>Remove Department</option>  
+                <option value="">All</option>  
+                <option value="HR">Remove HR</option>  
+                <option value="Operations">Remove Operations</option>  
+                <option value="Development">Remove Development</option>  
+                <option value="Finance">Remove Finance</option>  
+            </select>  
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <button style="padding: 6px;" (click)="distingDept()">Disting Department
+                <i *ngIf="departmentList.length"(click)="clear($event)" class="fa fa-times"></i>
+
+            </button>
+        </div>
+    </div>
+ </div>
+ <div class="table-container">
+    <table class="table table-striped" *ngIf="filterList.length">
+      <thead>
+          <tr>
+            <th (click)="sortByName(isAscenName = !isAscenName )"> Name <i class="fa fa-sort"></i></th>
+            <th>Department</th>
+            <th  (click)="sortByDate(isAscenDate = !isAscenDate )">joining date <i class="fa fa-sort"></i></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of filterList" (click)="gotoDetailsPage(emp)">
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ emp.joining_date }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <table class="table table-striped" *ngIf="!filterList.length">
+        <thead>
+            <tr>
+              <th>Department</th>
+              <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dept of departmentList">
+            <td>{{ dept.department }}</td>
+            <td>{{ dept.count }}</td>
+            
+          </tr>
+        </tbody>
+      </table>
+  </div>
