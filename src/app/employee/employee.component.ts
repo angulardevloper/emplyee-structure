@@ -114,6 +114,7 @@ filterExperience(number){
 /** Calculate count of candidate present in each departmants*/
 distingDept(){
   this.filterList = [];
+  this.departmentList = [];
   this.employee.forEach((x)=>{
      if(this.departmentList.some((val)=>{ return val["department"] == x["department"] })){
        this.departmentList.forEach((k)=>{
